@@ -4,8 +4,9 @@
   "description": "A Reddit-like application for users to discuss and share content",
   "main": "src/server.js",
   "scripts": {
-    "test": "set NODE_ENV=test && jasmine",
-    "start": "node src/server.js"
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js",
+    "database": "pg_ctl -D C:/PostgreSQL/data/pg10"
   },
   "author": "Tish Griffiths",
   "license": "ISC",
@@ -16,6 +17,9 @@
   "dependencies": {
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.41.2"
   }
 }

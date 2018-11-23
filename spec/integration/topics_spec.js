@@ -61,11 +61,9 @@ describe("routes : topics", () => {
             };
       
             it("should create a new topic and redirect", (done) => {
-      
-      //#1
+
               request.post(options,
-      
-      //#2
+
                 (err, res, body) => {
                   Topic.findOne({where: {title: "blink-182 songs"}})
                   .then((topic) => {
@@ -81,6 +79,32 @@ describe("routes : topics", () => {
                 }
               );
             });
+            // For this assignment, write validations for the Topic resource. Topic objects should have a title that's at least five characters long and a description that's at least ten characters long.
+            it("should not create a new topic that fails validations", (done) => {
+              const options = {
+                url: `${base}create`,
+                form: {
+                  title: "a",
+                  description: "b"
+                }
+              };
+       
+              request.post(options,
+                (err, res, body) => {
+
+                  Topic.findOne({where: {title: "a"}})
+                  .then((topic) => {
+                      expect(topic).toBeNull();
+                      done();
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    done();
+                  });
+                }
+              );
+            });
+
           });
 
           describe("GET /topics/:id", () => {
@@ -146,12 +170,12 @@ describe("routes : topics", () => {
                     description: "There are a lot of them"
                   }
                 };
-       //#1
+
                 request.post(options,
                   (err, res, body) => {
        
                   expect(err).toBeNull();
-       //#2
+
                   Topic.findOne({
                     where: { id: this.topic.id }
                   })

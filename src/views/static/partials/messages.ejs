@@ -6,10 +6,13 @@
         </button>
         Validation errors:
         <ul>
-
+          
           <% messages.error.forEach((err) => { %>
             <li><%= `${err.param} ${err.msg}` %></li>
-          <% }) %>
+          <% }) %> 
+          <!-- <% messages.error.forEach((err) => { %>
+            <li><%= ${JSON.stringify(err)}%></li>
+        <% }) %> -->
         </ul>
       </div>
     <% } %>

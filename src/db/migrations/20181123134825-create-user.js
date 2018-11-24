@@ -10,6 +10,7 @@ module.exports = {
       },
       email: {
         allowNull: false,
+        type: Sequelize.STRING,
         unique: true,
         // the validate property allows us to pass validators to apply to the data
         validate: {

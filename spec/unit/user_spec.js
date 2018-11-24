@@ -2,11 +2,11 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const User = require("../../src/db/models").User;
 
 describe("User", () => {
-this.user;
+  this.user;
   beforeEach((done) => {
 
     sequelize.sync({force: true})
-    .then(() => {
+    .then((user) => {
       this.user = user;
       done();
     })

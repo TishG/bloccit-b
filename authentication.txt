@@ -1,0 +1,31 @@
+Strategy - passport-google-oauth20
+    -Using google to sign into your application
+
+Before implementing this strategy, you need to register an application with Google. Your application gets issued a client ID and client secret, which you implement in your node.js project. You also need to configure a redirect URI(the route to take the user after logging in).
+
+To Configure: 
+const GoogleStrategy = require('passport-google-oauth20').Strategy; <<< to import passport's google strategy
+
+passport.use(new GoogleStrategy({ <<< passport's use method
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://www.example.com/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) { <<< verify callback function
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+To Authenticate Requests:
+
+app.get('/auth/google', <<< route middleware
+  passport.authenticate('google', { scope: ['profile'] })); <<< authenticate requests using the google strategy, second parameter tells google what information we would like to access. In this case, profile information.
+
+app.get('/auth/google/callback', <<< route middleware
+  passport.authenticate('google', { failureRedirect: '/login' }), <<<use 'google' strategy, if logging in fails, bring user back to the login page.
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/'); <<< if logging in is successful, bring user to the homepage.
+  });

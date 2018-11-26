@@ -27,6 +27,37 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       onDelete: "CASCADE"
     });
+    Post.hasMany(models.Comment, {
+      foreignKey: "postId",
+      as: "comments"
+    });
+    Post.hasMany(models.Vote, {
+      foreignKey: "postId",
+      as: "votes"
+    });
+    Post.hasMany(models.Favorite, {
+      foreignKey: "postId",
+      as: "favorites"
+    });
   };
+  Post.prototype.getPoints = function(){
+
+        if(this.votes.length === 0) return 0
+          return this.votes
+            .map((v) => { return v.value })
+            .reduce((prev, next) => { return prev + next });
+        };
+
+      Post.prototype.hasUpvoteFor = function(userId){
+        if(this.votes.userId == userId && this.votes.value === 1) return true
+      };
+      
+      Post.prototype.hasDownvoteFor = function(userId){
+        if(this.votes.userId == userId && this.votes.value === -1) return true
+      };
+
+      Post.prototype.getFavoriteFor = function(userId){
+        return this.favorites.find((favorite) => { return favorite.userId == userId });
+      };
   return Post;
 };

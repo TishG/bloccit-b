@@ -4,7 +4,7 @@ const Authorizer = require("../policies/topic");
 
 module.exports = {
 
-  getAllTopics(callback){
+  getAllTopics(callback) {
     return Topic.all()
 
     .then((topics) => {
@@ -14,7 +14,7 @@ module.exports = {
       callback(err);
     })
   },
-  addTopic(newTopic, callback){
+  addTopic(newTopic, callback) {
     return Topic.create({
       title: newTopic.title,
       description: newTopic.description
@@ -26,7 +26,7 @@ module.exports = {
       callback(err);
     })
   },
-  getTopic(id, callback){
+  getTopic(id, callback) {
     return Topic.findById(id, {
       include: [{
         model: Post,
@@ -40,7 +40,7 @@ module.exports = {
       callback(err);
     })
   },
-  deleteTopic(req, callback){
+  deleteTopic(req, callback) {
 
         return Topic.findById(req.params.id)
         .then((topic) => {
@@ -64,12 +64,12 @@ module.exports = {
           callback(err);
         });
       },
-      updateTopic(req, updatedTopic, callback){
+      updateTopic(req, updatedTopic, callback) {
 
              return Topic.findById(req.params.id)
-             .then((topic) => {
+             .then((topic) => {           
 
-               if(!topic){
+               if(!topic) {
                  return callback("Topic not found");
                }
 

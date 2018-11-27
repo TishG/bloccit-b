@@ -260,7 +260,7 @@ describe("routes : posts", () => {
     });
   });
 
-  fdescribe("POST /topics/:topicId/posts/:id/update", () => {
+  describe("POST /topics/:topicId/posts/:id/update", () => {
     it("should return a status code 302", (done) => {
       request.post({
         url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,

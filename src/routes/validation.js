@@ -20,6 +20,7 @@ module.exports = {
   },
 
   validateUsers(req, res, next) {
+    console.log("VALIDATE USER:", req.body);
     if(req.method === "POST") {
 
       req.checkBody("email", "must be valid").isEmail();

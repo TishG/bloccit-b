@@ -81,8 +81,8 @@ module.exports = {
                    fields: Object.keys(updatedTopic)
                  })
                  .then(() => {
-                   callback(null, topic);
-                 })
+                  callback(null, topic);
+                })
                  .catch((err) => {
                    callback(err);
                  });

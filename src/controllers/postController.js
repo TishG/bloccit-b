@@ -20,8 +20,8 @@ module.exports = {
               let newPost = {
                 title: req.body.title,
                 body: req.body.body,
-                userId: req.user.id,
-                topidId: req.params.topicId
+                topicId: req.params.topicId,
+                userId: req.user.id
               };
               postQueries.addTopic(newPost, (err, post) => {
                 if(err){

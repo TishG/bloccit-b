@@ -136,9 +136,9 @@ describe("routes : posts", () => {
       }, (err, res, body) => {
         expect(res.statusCode).not.toBe(302);
         done();
+        });
       });
     });
-  });
   });
 
   describe("admin user performing CRUD actions for Topic", () => {

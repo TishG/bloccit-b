@@ -259,7 +259,6 @@ describe("routes : topics", () => {
           request.post(`${base}${this.topic.id}/destroy`, (err, res, body) => {
             Topic.all()
             .then((topics) => {
-              // confirm that no topics were deleted
               expect(topics.length).toBe(topicCountBeforeDelete);
               done();
             })
@@ -296,7 +295,7 @@ describe("routes : topics", () => {
         (err, res, body) => {
           expect(err).toBeNull();
           Topic.findOne({
-            where: { id:1 }
+            where: { id: 1 }
           })
           .then((topic) => {
             expect(topic.title).toBe("JS Frameworks"); 

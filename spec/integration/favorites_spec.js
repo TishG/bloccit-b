@@ -10,7 +10,7 @@ const Favorite = require("../../src/db/models").Favorite;
 describe("routes : favorites", () => {
 
  beforeEach((done) => {
-
+   this.favorite; //added
    this.user;
    this.topic;
    this.post;
@@ -40,6 +40,7 @@ describe("routes : favorites", () => {
        .then((res) => {
          this.topic = res;
          this.post = this.topic.posts[0];
+         this.favorite = favorite; //added
          done();
        })
        .catch((err) => {
@@ -83,7 +84,7 @@ describe("routes : favorites", () => {
             (err, res, body) => {
               Favorite.all()
               .then((favorite) => {
-                expect(favCountBeforeCreate).toBe(favorite.length); // confirm no favorites created
+                expect(favCountBeforeCreate).toBe(favorite.length);
                 done();
               })
               .catch((err) => {
@@ -120,6 +121,9 @@ describe("routes : favorites", () => {
         };
         request.post(options,
           (err, res, body) => {
+            console.log("userId: " + this.user.id + ", postId: " + this.post.id);
+            console.log("Favorite created!");
+            console.log(this.favorite);
             Favorite.findOne({
               where: {
                 userId: this.user.id,
@@ -156,6 +160,7 @@ describe("routes : favorites", () => {
             console.log(favorites);
             const favorite = favorites[0];
             favCountBeforeDelete = favorites.length;
+            console.log(favorite); //added
 
             request.post(`${base}${this.topic.id}/posts/${this.post.id}/favorites/${favorite.id}/destroy`,
               (err, res, body) => {

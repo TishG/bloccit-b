@@ -1,4 +1,3 @@
-// #1
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
@@ -9,13 +8,12 @@ const Vote = require("../../src/db/models").Vote;
 describe("Vote", () => {
 
   beforeEach((done) => {
- // #2
+
     this.user;
     this.topic;
     this.post;
     this.vote;
 
- // #3
     sequelize.sync({force: true}).then((res) => {
 
       User.create({
@@ -65,34 +63,27 @@ describe("Vote", () => {
     });
   });
 
-   // #1
    describe("#create()", () => {
 
-    // #2
         it("should create an upvote on a post for a user", (done) => {
- 
-    // #3
+
           Vote.create({
             value: 1,
             postId: this.post.id,
             userId: this.user.id
           })
           .then((vote) => {
- 
-    // #4
             expect(vote.value).toBe(1);
             expect(vote.postId).toBe(this.post.id);
             expect(vote.userId).toBe(this.user.id);
             done();
- 
           })
           .catch((err) => {
             console.log(err);
             done();
           });
         });
- 
-    // #5
+
         it("should create a downvote on a post for a user", (done) => {
           Vote.create({
             value: -1,
@@ -104,54 +95,31 @@ describe("Vote", () => {
             expect(vote.postId).toBe(this.post.id);
             expect(vote.userId).toBe(this.user.id);
             done();
- 
           })
           .catch((err) => {
             console.log(err);
             done();
           });
         });
- 
-    // #6
+
         it("should not create a vote without assigned post or user", (done) => {
           Vote.create({
             value: 1
           })
-          .then((vote) => {
- 
+          .then((vote) => { 
            // the code in this block will not be evaluated since the validation error
            // will skip it. Instead, we'll catch the error in the catch block below
            // and set the expectations there
- 
             done();
- 
           })
-          .catch((err) => {
- 
+          .catch((err) => { 
             expect(err.message).toContain("Vote.userId cannot be null");
             expect(err.message).toContain("Vote.postId cannot be null");
             done();
- 
           })
         });
+      });
 
-        it("should not create a vote with a value other than 1 or -1", (done) => {
-            Vote.create({
-              value: 0,
-              postId: this.post.id,
-              userId: this.user.id
-            })
-            .then((vote) => {
-           
-            })
-            .catch((err) => {
-              expect(err.message).toContain("Validation isIn on value failed");
-               done();
-             });
-            });
-        }); 
-
-     // #1
    describe("#setUser()", () => {
 
     it("should associate a vote and a user together", (done) => {
@@ -173,10 +141,8 @@ describe("Vote", () => {
 
            this.vote.setUser(newUser)  // change the vote's user reference for newUser
            .then((vote) => {
-
              expect(vote.userId).toBe(newUser.id); //confirm it was updated
              done();
-
            });
          })
          .catch((err) => {
@@ -185,10 +151,8 @@ describe("Vote", () => {
          });
        })
      });
-
    });
 
-// #2
    describe("#getUser()", () => {
 
      it("should return the associated user", (done) => {
@@ -211,7 +175,6 @@ describe("Vote", () => {
      });
    }); 
 
-   // #1
    describe("#setPost()", () => {
 
     it("should associate a post and a vote together", (done) => {
@@ -231,15 +194,12 @@ describe("Vote", () => {
           userId: this.user.id
         })
         .then((newPost) => {
-
           expect(this.vote.postId).toBe(this.post.id); // check vote not associated with newPost
 
           this.vote.setPost(newPost)              // update post reference for vote
           .then((vote) => {
-
             expect(vote.postId).toBe(newPost.id); // ensure it was updated
             done();
-
           });
         })
         .catch((err) => {
@@ -248,10 +208,8 @@ describe("Vote", () => {
         });
       });
     });
-
   });
 
-// #2
   describe("#getPost()", () => {
 
     it("should return the associated post", (done) => {
@@ -274,72 +232,5 @@ describe("Vote", () => {
     });
   });
 
-  describe("#getPoints()", () => {
-
-    it("should return a count of all the votes a post has", (done) => {
-
-        Vote.create({
-            value: 1,
-            userId: this.user.id,
-            postId: this.post.id
-          })
-          .then((vote) => {
-            this.comment.getPost()
-            let points = this.post.getPoints();
-            expect(points).toBe(1);
-              done();
-            })
-          .catch((err) => {
-            console.log(err);
-            done();
-          });
-        });
-     });
-
-     describe("#hasUpvoteFor()", () => {
-
-        it("should return true if the associated user has an upvote", (done) => {
-    
-            Vote.create({
-                value: 1,
-                userId: this.user.id,
-                postId: this.post.id
-              })
-              .then((vote) => {
-                vote.postId.hasUpvoteFor()
-                .then((associatedPost) => {
-                expect(this.votes).toBe(true);
-                  done();
-                });
-            })
-              .catch((err) => {
-                console.log(err);
-                done();
-              });
-            });
-         });
-
-         describe("#hasDownvoteFor()", () => {
-
-            it("should return true if the associated user has a downvote", (done) => {
-        
-                Vote.create({
-                    value: -1,
-                    userId: this.user.id,
-                    postId: this.post.id
-                  })
-                  .then((vote) => {
-                    vote.postId.hasDownvoteFor()
-                    .then((associatedPost) => {
-                    expect(this.votes).toBe(true);
-                      done();
-                    });
-                })
-                  .catch((err) => {
-                    console.log(err);
-                    done();
-                  });
-                });
-             });
 
 });

@@ -59,7 +59,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("GET /topics/new", () => {
@@ -71,7 +70,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("POST /topics/create", () => {
@@ -110,7 +108,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("POST /topics/:id/destroy", () => {
@@ -130,12 +127,9 @@ describe("routes : topics", () => {
               expect(topics.length).toBe(topicCountBeforeDelete - 1);
               done();
             })
-
           });
         })
-
       });
-
     });
 
     describe("GET /topics/:id/edit", () => {
@@ -148,7 +142,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("POST /topics/:id/update", () => {
@@ -171,9 +164,7 @@ describe("routes : topics", () => {
           });
         });
       });
-
     });
-
   }); //end context for admin user
 
   // context of member user
@@ -201,7 +192,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("GET /topics/new", () => {
@@ -213,7 +203,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("POST /topics/create", () => {
@@ -272,12 +261,9 @@ describe("routes : topics", () => {
               expect(topics.length).toBe(topicCountBeforeDelete);
               done();
             })
-
           });
         })
-
       });
-
     });
 
     describe("GET /topics/:id/edit", () => {
@@ -291,7 +277,6 @@ describe("routes : topics", () => {
           done();
         });
       });
-
     });
 
     describe("POST /topics/:id/update", () => {
@@ -317,9 +302,7 @@ describe("routes : topics", () => {
           });
         });
       });
-
     });
-
   });
 
 });

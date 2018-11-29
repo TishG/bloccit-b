@@ -1,12 +1,19 @@
 module.exports = class ApplicationPolicy {
 
+<<<<<<< HEAD
     // #1
+=======
+>>>>>>> authorization-c
      constructor(user, record) {
        this.user = user;
        this.record = record;
      }
+<<<<<<< HEAD
    
     // #2
+=======
+
+>>>>>>> authorization-c
      _isOwner() {
        return this.record && (this.record.userId == this.user.id);
      }
@@ -14,8 +21,12 @@ module.exports = class ApplicationPolicy {
      _isAdmin() {
        return this.user && this.user.role == "admin";
      }
+<<<<<<< HEAD
    
     // #3
+=======
+
+>>>>>>> authorization-c
      new() {
        return this.user != null;
      }
@@ -27,8 +38,12 @@ module.exports = class ApplicationPolicy {
      show() {
        return true;
      }
+<<<<<<< HEAD
    
     // #4
+=======
+
+>>>>>>> authorization-c
      edit() {
        return this.new() &&
          this.record && (this._isOwner() || this._isAdmin());
@@ -37,8 +52,12 @@ module.exports = class ApplicationPolicy {
      update() {
        return this.edit();
      }
+<<<<<<< HEAD
    
     // #5
+=======
+
+>>>>>>> authorization-c
      destroy() {
        return this.update();
      }

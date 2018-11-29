@@ -1,7 +1,7 @@
 const request = require("request");
 const server = require("../../src/server");
 const base = "http://localhost:3000/topics/";
-const sequelize = require("../../src/db/models/index").sequelize;
+const sequelize = require('../../src/db/models/index').sequelize;
 const Topic = require("../../src/db/models").Topic;
 const User = require("../../src/db/models").User;
 
@@ -27,6 +27,7 @@ describe("routes : topics", () => {
 
   // context of admin user
   describe("admin user performing CRUD actions for Topic", () => {
+<<<<<<< HEAD
 
     beforeEach((done) => {  // before each suite in admin context
       request.get({         // mock authentication
@@ -47,6 +48,39 @@ describe("routes : topics", () => {
           expect(body).toContain("JS Frameworks");
           done();
         });
+=======
+        beforeEach((done) => {
+          User.create({
+            email: "admin@example.com",
+            password: "123456",
+            role: "admin"
+          })
+          .then((user) => {
+            request.get({         // mock authentication
+              url: "http://localhost:3000/auth/fake",
+              form: {
+                role: user.role,     // mock authenticate as admin user
+                userId: user.id,
+                email: user.email
+              }
+            },
+              (err, res, body) => {
+                done();
+              }
+            );
+          });
+        });
+
+    describe("GET /topics", () => {
+
+      it("should respond with all topics", (done) => {
+        request.get(base, (err, res, body) => {
+          expect(err).toBeNull();
+          expect(body).toContain("Topics");
+          expect(body).toContain("JS Frameworks");
+          done();
+        });
+>>>>>>> authorization-c
       });
 
     });
@@ -167,6 +201,7 @@ describe("routes : topics", () => {
 
   // context of member user
   describe("member user performing CRUD actions for Topic", () => {
+<<<<<<< HEAD
 
     beforeEach((done) => {  // before each suite in admin context
       request.get({
@@ -178,6 +213,21 @@ describe("routes : topics", () => {
       done();
     });
 
+=======
+        beforeEach((done) => {
+          request.get({
+            url: "http://localhost:3000/auth/fake",
+            form: {
+              role: "member"
+            }
+          },
+            (err, res, body) => {
+              done();
+            }
+          );
+        });
+        
+>>>>>>> authorization-c
     describe("GET /topics", () => {
 
       it("should respond with all topics", (done) => {
@@ -278,6 +328,10 @@ describe("routes : topics", () => {
           done();
         });
       });
+<<<<<<< HEAD
+=======
+
+>>>>>>> authorization-c
     });
 
     describe("POST /topics/:id/update", () => {

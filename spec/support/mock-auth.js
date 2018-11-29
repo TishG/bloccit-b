@@ -1,7 +1,11 @@
 module.exports = {
 
       fakeIt(app){
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> authorization-c
         let role, id, email;
 
         function middleware(req,res,next){

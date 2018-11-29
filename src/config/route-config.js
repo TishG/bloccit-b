@@ -4,6 +4,7 @@ module.exports = {
       const postRoutes = require("../routes/posts");
       const topicRoutes = require("../routes/topics");
       const userRoutes = require("../routes/users");
+<<<<<<< HEAD
       const commentRoutes = require("../routes/comments");
       const voteRoutes = require("../routes/votes");
     
@@ -12,6 +13,12 @@ module.exports = {
     mockAuth.fakeIt(app);
       }
       
+=======
+      if(process.env.NODE_ENV === "test") {
+        const mockAuth = require("../../spec/support/mock-auth.js");
+        mockAuth.fakeIt(app);
+      }
+>>>>>>> authorization-c
       app.use(staticRoutes);
       app.use(postRoutes);
       app.use(topicRoutes);

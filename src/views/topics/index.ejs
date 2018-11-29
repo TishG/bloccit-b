@@ -6,23 +6,25 @@
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
-
       <h1>Topics</h1>
+<<<<<<< HEAD
       
       <% if(currentUser && currentUser.isAdmin()) { %>
         <a href="/topics/new" class="btn btn-success">New Topic</a>
       <% } %>
 
+=======
+      <% if(currentUser && currentUser.isAdmin()) { %>
+        <a href="/topics/new" class="btn btn-success">New Topic</a>
+      <% } %>
+>>>>>>> authorization-c
       <ul class="list-group">
-<!-- #1 -->
         <% topics.forEach((topic) => { %>
-<!-- #2 -->
           <li class="list-group-item">
             <a href="/topics/<%= topic.id %>"> <%= topic.title %> </a>
           </li>
         <% }) %>
       </ul>
-
     </main>
   </body>
 </html>

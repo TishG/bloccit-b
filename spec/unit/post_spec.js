@@ -45,7 +45,11 @@ describe("Post", () => {
   describe("#create()", () => {
 
     it("should create a post object with a title, body, and assigned topic and user", (done) => {
+<<<<<<< HEAD
 //#1
+=======
+
+>>>>>>> authorization-c
       Post.create({
         title: "Pros of Cryosleep during the long journey",
         body: "1. Not having to answer the 'are we there yet?' question.",
@@ -54,7 +58,6 @@ describe("Post", () => {
       })
       .then((post) => {
 
-//#2
         expect(post.title).toBe("Pros of Cryosleep during the long journey");
         expect(post.body).toBe("1. Not having to answer the 'are we there yet?' question.");
         expect(post.topicId).toBe(this.topic.id);
@@ -95,19 +98,17 @@ describe("Post", () => {
 
     it("should associate a topic and a post together", (done) => {
 
-// #1
       Topic.create({
         title: "Challenges of interstellar travel",
         description: "1. The Wi-Fi is terrible"
       })
       .then((newTopic) => {
 
-// #2
         expect(this.post.topicId).toBe(this.topic.id);
-// #3
+
         this.post.setTopic(newTopic)
         .then((post) => {
-// #4
+
           expect(post.topicId).toBe(newTopic.id);
           done();
 
@@ -131,6 +132,7 @@ describe("Post", () => {
   describe("#setUser()", () => {
 
     it("should associate a post and a user together", (done) => {
+<<<<<<< HEAD
 
       User.create({
         email: "ada@example.com",
@@ -161,9 +163,37 @@ describe("Post", () => {
         expect(associatedUser.email).toBe("starman@tesla.com");
         done();
       });
+=======
+>>>>>>> authorization-c
 
+      User.create({
+        email: "ada@example.com",
+        password: "password"
+      })
+      .then((newUser) => {
+
+        expect(this.post.userId).toBe(this.user.id);
+
+        this.post.setUser(newUser)
+        .then((post) => {
+
+          expect(this.post.userId).toBe(newUser.id);
+          done();
+        });
+      })
     });
+  });
 
+  describe("#getUser()", () => {
+
+    it("should return the associated topic", (done) => {
+
+      this.post.getUser()
+      .then((associatedUser) => {
+        expect(associatedUser.email).toBe("starman@tesla.com");
+        done();
+      });
+    });
   });
 
 })

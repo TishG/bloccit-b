@@ -4,14 +4,15 @@
  module.exports = {
    create(req, res, next){
      const authorized = new Authorizer(req.user).create();
-
      if(authorized) {
        let newComment = {
          body: req.body.body,
          userId: req.user.id,
          postId: req.params.postId
        };
+
        commentQueries.createComment(newComment, (err, comment) => {
+
          if(err){
            req.flash("error", err);
          }

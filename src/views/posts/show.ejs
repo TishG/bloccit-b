@@ -18,12 +18,11 @@
            <% if(currentUser) { %>
              <% include ../comments/new.ejs %>
            <% } %>
-          </section>
+      </section>
 
           <section id="comment-list">
            <% if(post.comments) { %>
              <% post.comments.forEach((comment) => { %>
-
                <%- include("../comments/show.ejs", {comment}) %>
              <% }) %>
            <% } %>

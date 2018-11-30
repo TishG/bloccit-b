@@ -33,6 +33,7 @@ module.exports = {
       if(req.method === "POST") {
         req.checkBody("body", "must not be empty"). notEmpty();
       }
+ 
       const errors = req.validationErrors();
  
       if (errors) {

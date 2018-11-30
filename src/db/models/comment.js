@@ -1,15 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+  const Comment = sequelize.define('Comment', {
     body: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    topicId: {
+    postId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -18,19 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
-  Post.associate = function(models) {
-    Post.hasMany(models.Comment, {
+  Comment.associate = function(models) {
+    Comment.belongsTo(models.Post, {
       foreignKey: "postId",
-      as: "comments"
-    });
-    Post.belongsTo(models.Topic, {
-      foreignKey: "topicId",
       onDelete: "CASCADE"
     });
-    Post.belongsTo(models.User, {
+
+    Comment.belongsTo(models.User, {
       foreignKey: "userId",
       onDelete: "CASCADE"
     });
   };
-  return Post;
+  return Comment;
 };

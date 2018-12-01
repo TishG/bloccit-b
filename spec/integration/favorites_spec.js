@@ -74,6 +74,7 @@ describe("routes : favorites", () => {
         };
         request.post(options,
           (err, res, body) => {
+            // console.log("user.id", this.user.id, "post.id", this.post.id)
             Favorite.findOne({
               where: {
                 userId: this.user.id,

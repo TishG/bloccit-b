@@ -1,4 +1,4 @@
-## Bloccit
+# Bloccit
 ![image](https://user-images.githubusercontent.com/38973991/50047032-65c29200-0073-11e9-8257-b375c9a39f37.png)
 
 ## About
@@ -23,7 +23,7 @@ View on your local device:
 6. type "npm start" in the command line 
 7. Open up google chrome and type into the url, "localhost:3000" (or whichever port your host is)
 
-# Technologies needed to view application on your device:
+### Technologies needed to view application on your device:
 * [Node.js](https://nodejs.org/en/) 
 * [Git Bash](https://git-scm.com/downloads)
 * [Google Chrome](https://www.google.com/chrome/) 
